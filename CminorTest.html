@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/15.1.3/Tone.js"></script>
+    <script>
+        const sampler = new Tone.Sampler({
+            urls: {
+                "A0": "./sound/1.mp3",
+                "A#0": "./sound/2.mp3",
+                "B0": "./sound/3.mp3",
+                "C1": "./sound/4.mp3",
+                "C#1": "./sound/5.mp3",
+                "D1": "./sound/6.mp3",
+                "D#1": "./sound/7.mp3",
+                "E1": "./sound/8.mp3",
+                "F1": "./sound/9.mp3",
+                "F#1": "./sound/10.mp3",
+                "G1": "./sound/11.mp3",
+                "G#1": "./sound/12.mp3",
+                "A1": "./sound/13.mp3",
+                "A#1": "./sound/14.mp3",
+                "B1": "./sound/15.mp3",
+                "C2": "./sound/16.mp3",
+                "C#2": "./sound/17.mp3",
+                "D2": "./sound/18.mp3",
+                "D#2": "./sound/19.mp3",
+                "E2": "./sound/20.mp3",
+                "F2": "./sound/21.mp3",
+                "F#2": "./sound/22.mp3",
+                "G2": "./sound/23.mp3",
+                "G#2": "./sound/24.mp3",
+                "A2": "./sound/25.mp3",
+                "A#2": "./sound/26.mp3",
+                "B2": "./sound/27.mp3",
+                "C3": "./sound/28.mp3",
+                "C#3": "./sound/29.mp3",
+                "D3": "./sound/30.mp3",
+                "D#3": "./sound/31.mp3",
+                "E3": "./sound/32.mp3",
+                "F3": "./sound/33.mp3",
+                "F#3": "./sound/34.mp3",
+                "G3": "./sound/35.mp3",
+                "G#3": "./sound/36.mp3",
+                "A3": "./sound/37.mp3",
+                "A#3": "./sound/38.mp3",
+                "B3": "./sound/39.mp3",
+                "C4": "./sound/40.mp3",
+                "C#4": "./sound/41.mp3",
+                "D4": "./sound/42.mp3",
+                "D#4": "./sound/43.mp3",
+                "E4": "./sound/44.mp3",
+                "F4": "./sound/45.mp3",
+                "F#4": "./sound/46.mp3",
+                "G4": "./sound/47.mp3",
+                "G#4": "./sound/48.mp3",
+                "A4": "./sound/49.mp3",
+                "A#4": "./sound/50.mp3",
+                "B4": "./sound/51.mp3",
+                "C5": "./sound/52.mp3",
+                "C#5": "./sound/53.mp3",
+                "D5": "./sound/54.mp3",
+                "D#5": "./sound/55.mp3",
+                "E5": "./sound/56.mp3",
+                "F5": "./sound/57.mp3",
+                "F#5": "./sound/58.mp3",
+                "G5": "./sound/59.mp3",
+                "G#5": "./sound/60.mp3",
+                "A5": "./sound/61.mp3",
+                "A#5": "./sound/62.mp3",
+                "B5": "./sound/63.mp3",
+                "C6": "./sound/64.mp3",
+                "C#6": "./sound/65.mp3",
+                "D6": "./sound/66.mp3",
+                "D#6": "./sound/67.mp3",
+                "E6": "./sound/68.mp3",
+                "F6": "./sound/69.mp3",
+                "F#6": "./sound/70.mp3",
+                "G6": "./sound/71.mp3",
+                "G#6": "./sound/72.mp3",
+                "A6": "./sound/73.mp3",
+                "A#6": "./sound/74.mp3",
+                "B6": "./sound/75.mp3",
+                "C7": "./sound/76.mp3",
+                "C#7": "./sound/77.mp3",
+                "D7": "./sound/78.mp3",
+                "D#7": "./sound/79.mp3",
+                "E7": "./sound/80.mp3",
+                "F7": "./sound/87.mp3",
+                "F#7": "./sound/82.mp3",
+                "G7": "./sound/83.mp3",
+                "G#7": "./sound/84.mp3",
+                "A7": "./sound/85.mp3",
+                "C8": "./sound/86.mp3",
+                "C#8": "./sound/87.mp3",
+            },// envelope: {
+            //     attack: 0.1,    // 소리가 빠르게 시작
+            //     decay: 0.3,     // 일정 시간 동안 감소
+            //     sustain: 1,     // 지속 시간 최대
+            //     release: 3      // 키를 떼면 3초 동안 소리가 서서히 사라짐
+            // },
+            onload: () => {
+                console.log("All samples loaded");
+            }
+        }).toDestination();
+    </script>
+</head>
+
+<body>
+
+    <script>
+        let map = new Map();
+        let shiftMap = {
+            "A0": { "shift": "A#0" },
+            "A#0": { "shift": "B0" },
+            "B0": { "shift": "C1" },
+            "C1": { "shift": "C#1" },
+            "C#1": { "shift": "D1" },
+            "D1": { "shift": "D#1" },
+            "D#1": { "shift": "E1" },
+            "E1": { "shift": "F1" },
+            "F1": { "shift": "F#1" },
+            "F#1": { "shift": "G1" },
+            "G1": { "shift": "G#1" },
+            "G#1": { "shift": "A1" },
+            "A1": { "shift": "A#1" },
+            "A#1": { "shift": "B1" },
+            "B1": { "shift": "C2" },
+            "C2": { "shift": "C#2" },
+            "C#2": { "shift": "D2" },
+            "D2": { "shift": "D#2" },
+            "D#2": { "shift": "E2" },
+            "E2": { "shift": "F2" },
+            "F2": { "shift": "F#2" },
+            "F#2": { "shift": "G2" },
+            "G2": { "shift": "G#2" },
+            "G#2": { "shift": "A2" },
+            "A2": { "shift": "A#2" },
+            "A#2": { "shift": "B2" },
+            "B2": { "shift": "C3" },
+            "C3": { "shift": "C#3" },
+            "C#3": { "shift": "D3" },
+            "D3": { "shift": "D#3" },
+            "D#3": { "shift": "E3" },
+            "E3": { "shift": "F3" },
+            "F3": { "shift": "F#3" },
+            "F#3": { "shift": "G3" },
+            "G3": { "shift": "G#3" },
+            "G#3": { "shift": "A3" },
+            "A3": { "shift": "A#3" },
+            "A#3": { "shift": "B3" },
+            "B3": { "shift": "C4" },
+            "C4": { "shift": "C#4" },
+            "C#4": { "shift": "D4" },
+            "D4": { "shift": "D#4" },
+            "D#4": { "shift": "E4" },
+            "E4": { "shift": "F4" },
+            "F4": { "shift": "F#4" },
+            "F#4": { "shift": "G4" },
+            "G4": { "shift": "G#4" },
+            "G#4": { "shift": "A4" },
+            "A4": { "shift": "A#4" },
+            "A#4": { "shift": "B4" },
+            "B4": { "shift": "C5" },
+            "C5": { "shift": "C#5" },
+            "C#5": { "shift": "D5" },
+            "D5": { "shift": "D#5" },
+            "D#5": { "shift": "E5" },
+            "E5": { "shift": "F5" },
+            "F5": { "shift": "F#5" },
+            "F#5": { "shift": "G5" },
+            "G5": { "shift": "G#5" },
+            "G#5": { "shift": "A5" },
+            "A5": { "shift": "A#5" },
+            "A#5": { "shift": "B5" },
+            "B5": { "shift": "C6" },
+            "C6": { "shift": "C#6" },
+            "C#6": { "shift": "D6" },
+            "D6": { "shift": "D#6" },
+            "D#6": { "shift": "E6" },
+            "E6": { "shift": "F6" },
+            "F6": { "shift": "F#6" },
+            "F#6": { "shift": "G6" },
+            "G6": { "shift": "G#6" },
+            "G#6": { "shift": "A6" },
+            "A6": { "shift": "A#6" },
+            "A#6": { "shift": "B6" },
+            "B6": { "shift": "C7" },
+            "C7": { "shift": "C#7" },
+            "C#7": { "shift": "D7" },
+            "D7": { "shift": "D#7" },
+            "D#7": { "shift": "E7" },
+            "E7": { "shift": "F7" },
+            "F7": { "shift": "F#7" },
+            "F#7": { "shift": "G7" },
+            "G7": { "shift": "G#7" },
+            "G#7": { "shift": "A7" },
+            "A7": { "shift": "A#7" },
+            "A#7": { "shift": "B7" },
+            "B7": { "shift": "C8" },
+            "C8": { "shift": "C#8" }
+        }
+        console.log(shiftMap);
+        let scaleArray = ["C", "D", "D#", "F", "G", "G#", "A#"];
+        let keyArray = [
+            '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm',];
+
+        let idx = 0;
+        for (let i = 2; i < 8; i++) {
+            for (let j = 0; j < scaleArray.length && idx < keyArray.length; j++) {
+                console.log(scaleArray[j] + i);
+                map.set(keyArray[idx], scaleArray[j] + i);
+                idx++;
+            }
+        }
+        console.log(map);
+        document.body.addEventListener('keydown', function (e) {
+            console.log(e.key);
+            console.log(map.get(e.key))
+            if (!e.repeat && map.get(e.key)) {
+                sampler.triggerAttackRelease(map.get(e.key), "2n");
+            }
+        })
+    </script>
+</body>
+
+</html>

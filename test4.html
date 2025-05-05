@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scales</title>
+</head>
+
+<body>
+    <script>
+        const scales = {
+            chromatic: ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"],
+            majorPatterns: {
+                C: ["C", "D", "E", "F", "G", "A", "B"],
+                D: ["D", "E", "F#", "G", "A", "B", "C#"],
+                E: ["E", "F#", "G#", "A", "B", "C#", "D#"],
+                F: ["F", "G", "A", "A#", "C", "D", "E"],
+                G: ["G", "A", "B", "C", "D", "E", "F#"],
+                A: ["A", "B", "C#", "D", "E", "F#", "G#"],
+                B: ["B", "C#", "D#", "E", "F#", "G#", "A#"]
+            },
+            minorPatterns: {
+                C: ["C", "D", "D#", "F", "F#", "G#", "A"],
+                D: ["D", "E", "F", "F#", "G", "A", "A#"],
+                E: ["E", "F#", "G", "G#", "A", "B", "C"],
+                F: ["F", "G", "G#", "A#", "B", "C", "D"],
+                G: ["G", "A", "A#", "C", "C#", "D", "E"],
+                A: ["A", "B", "C", "C#", "D", "E", "F"],
+                B: ["B", "C#", "D", "D#", "E", "F#", "G"]
+            }
+        };
+
+        // Shift helper function to create a shifted scale
+        function shiftScale(pattern) {
+            const chromatic = scales.chromatic;
+            const shiftedScale = pattern.map(note => {
+                const index = chromatic.indexOf(note);
+                const shiftedIndex = (index + 1) % chromatic.length;  // shift by one semitone
+                return chromatic[shiftedIndex];
+            });
+            return shiftedScale;
+        }
+
+        // Function to generate scale with shift for major and minor for all keys
+        function generateAllScalesWithShift() {
+            const allScalesWithShift = {};
+
+            // Generate major and minor scales for all keys
+            for (const key of Object.keys(scales.majorPatterns)) {
+                const majorShifted = shiftScale(scales.majorPatterns[key]);
+                const minorShifted = shiftScale(scales.minorPatterns[key]);
+
+                allScalesWithShift[key] = {
+                    major: scales.majorPatterns[key].reduce((result, note, index) => {
+                        result[note.toLowerCase()] = { c: note + "2", shift: majorShifted[index] + "2" };
+                        return result;
+                    }, {}),
+                    minor: scales.minorPatterns[key].reduce((result, note, index) => {
+                        result[note.toLowerCase()] = { c: note + "2", shift: minorShifted[index] + "2" };
+                        return result;
+                    }, {})
+                };
+            }
+
+            console.log("All Scales with Shift: ", allScalesWithShift);
+            return allScalesWithShift;
+        }
+
+        // Example usage
+        generateAllScalesWithShift();  // Generate and print all major and minor scales with shift for all keys
+        console.log(generateAllScalesWithShift());
+
+    </script>
+</body>
+
+</html>
